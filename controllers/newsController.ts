@@ -5,7 +5,7 @@ class NewsController {
 
   sendResponse = function (res, statusCode, data) {
     return res.status(statusCode).json({ result: data });
-  }
+  };
 
   get(req, res) {
     NewsService.get()
@@ -41,9 +41,12 @@ class NewsController {
   }
 
   delete(req, res) {
+    const _id = req.params.id;
 
+    NewsService.delete(_id)
+      .then(() => this.sendResponse(HttpStatus.ok), `News deleted sucessfully`)
+      .catch(error => console.error.bind(console, `Error ${error}`))
   }
-
 
 }
 
