@@ -4,8 +4,8 @@ import * as HttpStatus from 'http-status';
 import Helper from '../infra/helper';
 
 class NewsController {
-  
-  
+
+
   get(req, res) {
     NewsService.get()
       .then(news => Helper.sendResponse(res, HttpStatus.OK, news))
@@ -34,7 +34,7 @@ class NewsController {
 
     NewsService.update(_id, news)
       .then(news =>
-        Helper.sendResponse(res, HttpStatus.OK, ` ${news.title} updated successfully`)
+        Helper.sendResponse(res, HttpStatus.OK, "News updated successfully")
       )
       .catch(error => console.error.bind(console, `Error ${error}`))
   }
@@ -43,7 +43,7 @@ class NewsController {
     const _id = req.params.id;
 
     NewsService.delete(_id)
-      .then(() => Helper.sendResponse(HttpStatus.ok), `News deleted sucessfully`)
+      .then(() => Helper.sendResponse(res, HttpStatus.ok, "News deleted successfully"))
       .catch(error => console.error.bind(console, `Error ${error}`))
   }
 
