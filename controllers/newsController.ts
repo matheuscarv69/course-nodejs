@@ -43,7 +43,7 @@ class NewsController {
     const _id = req.params.id;
 
     NewsService.delete(_id)
-      .then(() => Helper.sendResponse(res, HttpStatus.ok, "News deleted successfully"))
+      .then(() => Helper.sendResponse(res, HttpStatus.OK, "News deleted successfully"))
       .catch(error => console.error.bind(console, `Error ${error}`))
   }
 
