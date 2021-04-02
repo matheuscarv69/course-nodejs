@@ -1,10 +1,12 @@
 import * as express from "express";
+import * as bodyParser from "body-parser";
 
 import Database from "./infra/database";
 
 class StartUp {
   public app: express.Application;
   private db: Database;
+  private bodyParser;
 
   constructor() {
     this.app = express();
@@ -12,7 +14,14 @@ class StartUp {
     this.db = new Database();
     this.db.createConnection();
 
+    this.middler();
     this.routes();
+  }
+
+  middler() {
+    this.app.use(bodyParser.json());
+    // para poder trabalhar com query string 
+    this.app.use(bodyParser.urlencoded({ extended: false }));
   }
 
   routes() {
@@ -20,8 +29,11 @@ class StartUp {
       res.send({
         Developer: 'Matheus Carvalho',
         Version: '0.0.1',
-      })
+      });
     })
+
+    // NewsController
+
   }
 }
 
