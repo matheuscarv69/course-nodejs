@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Executa o comando abaixo para instalar as dependências
-RUN npm intall 
+RUN npm install 
 
 # Copia tudo do diretório dist para a raiz 
 COPY ./dist .
