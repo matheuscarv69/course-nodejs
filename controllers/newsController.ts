@@ -22,11 +22,22 @@ class NewsController {
   }
 
   create(req, res) {
+    let vm = req.body;
 
+    NewsService.create(vm)
+      .then(news => this.sendResponse(res, HttpStatus.CREATED, "News created successfully"))
+      .catch(error => console.error.bind(console, `Error ${error}`))
   }
 
   update(req, res) {
+    const _id = req.params.id;
+    let news = req.body;
 
+    NewsService.update(_id, news)
+      .then(news =>
+        this.sendResponse(res, HttpStatus.OK, ` ${news.title} updated successfully`)
+      )
+      .catch(error => console.error.bind(console, `Error ${error}`))
   }
 
   delete(req, res) {
