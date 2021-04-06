@@ -17,7 +17,6 @@
     "express": "^4.17.1",
     "http-status": "^1.5.0",
     "mongoose": "^5.12.3",
-    "mongose": "0.0.2-security",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.3"
   },
