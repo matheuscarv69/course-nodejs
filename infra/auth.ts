@@ -11,13 +11,13 @@ class Auth {
     if (token) {
 
       jwt.verify(token, Configs.secret, function (error, decoded) {
-        
-        if(error){
+
+        if (error) {
           return res.status(403).send({
             success: false,
             message: '403 - invalid token'
           })
-        }else{
+        } else {
           next();
         }
 
@@ -27,11 +27,11 @@ class Auth {
 
       return res.status(401).send({
         success: false,
-        message: '401 - unathorized'
+        message: '401 - unauthorized'
       })
 
     }
-
   }
-
 }
+
+export default new Auth();

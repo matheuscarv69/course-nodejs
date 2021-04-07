@@ -4,6 +4,7 @@ import * as cors from "cors";
 
 import Database from "./infra/database";
 import NewsController from "./controllers/newsController";
+import Auth from "./infra/auth";
 
 class StartUp {
   public app: express.Application;
@@ -44,6 +45,7 @@ class StartUp {
       });
     })
 
+    this.app.use(Auth.validate);
     // NewsController
     this.app.route('/api/v1/news').get(NewsController.get);
     this.app.route('/api/v1/news/:id').get(NewsController.getById);
