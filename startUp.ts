@@ -4,6 +4,7 @@ import * as cors from "cors";
 
 import Database from "./infra/database";
 import NewsController from "./controllers/newsController";
+import AuthController from "./controllers/authController";
 import Auth from "./infra/auth";
 
 class StartUp {
@@ -44,6 +45,8 @@ class StartUp {
         Version: '0.0.1',
       });
     })
+
+    this.app.route('/api/v1/users').post(AuthController.create);
 
     this.app.use(Auth.validate);
     // NewsController

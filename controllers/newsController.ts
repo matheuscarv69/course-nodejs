@@ -5,7 +5,6 @@ import Helper from '../infra/helper';
 
 class NewsController {
 
-
   get(req, res) {
     NewsService.get()
       .then(news => Helper.sendResponse(res, HttpStatus.OK, news))
