@@ -7,6 +7,8 @@ import NewsController from "./controllers/newsController";
 import AuthController from "./controllers/authController";
 import Auth from "./infra/auth";
 
+import uploads from "./infra/uploads";
+
 class StartUp {
   public app: express.Application;
   private db: Database;
@@ -47,6 +49,16 @@ class StartUp {
     })
 
     this.app.route('/api/v1/users').post(AuthController.create);
+
+    this.app.route('/api/v1/news/uploads').post(uploads.single('file'), (req, res) => {
+
+      try {
+        res.send("Upload file successfully")
+      } catch (error) {
+        console.log(error);
+      }
+
+    });
 
     this.app.use(Auth.validate);
     // NewsController
