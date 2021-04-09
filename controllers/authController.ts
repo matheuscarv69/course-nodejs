@@ -1,5 +1,5 @@
-import * as jwt from 'jsonwebtoken';
-import * as HttpStatus from 'http-status';
+import * as jwt from "jsonwebtoken";
+import * as HttpStatus from "http-status";
 
 import Helper from '../infra/helper';
 import Configs from '../infra/configs'
