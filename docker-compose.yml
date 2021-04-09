@@ -3,7 +3,7 @@ services:
   api:
     image: matheuscarv69/api-ts
     ports:
-      - "80:3050"
+      - "8080:3050"
     links:
       - link-db
   link-db:
