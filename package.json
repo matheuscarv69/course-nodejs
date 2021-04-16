@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "tsc -w",
     "start": "node program.js",
-    "dev": "node ./dist/program.js"
+    "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules ./program.ts"
   },
   "keywords": [],
   "author": "",
@@ -31,6 +31,7 @@
     "@types/http-status": "^1.1.2",
     "@types/jsonwebtoken": "^8.5.1",
     "@types/multer": "^1.4.5",
-    "@types/node": "^14.14.37"
+    "@types/node": "^14.14.37",
+    "ts-node-dev": "^1.1.6"
   }
 }
