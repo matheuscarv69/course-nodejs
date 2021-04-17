@@ -3,11 +3,7 @@ import * as bodyParser from "body-parser";
 import * as cors from "cors";
 
 import Database from "./infra/database";
-import NewsController from "./controllers/newsController";
-import AuthController from "./controllers/authController";
-import Auth from "./infra/auth";
-
-import uploads from "./infra/uploads";
+import router from "./routes";
 
 class StartUp {
   public app: express.Application;
@@ -21,7 +17,7 @@ class StartUp {
     this.db.createConnection();
 
     this.middler();
-    this.routes();
+    this.app.use(router);
   }
 
   enableCors() {
@@ -40,35 +36,6 @@ class StartUp {
     this.app.use(bodyParser.urlencoded({ extended: false }));
   }
 
-  routes() {
-    this.app.route('/').get((req, res) => {
-      res.send({
-        Developer: 'Matheus Carvalho',
-        Version: '0.0.1',
-      });
-    })
-
-    this.app.route('/api/v1/users').post(AuthController.create);
-
-    this.app.route('/api/v1/news/uploads').post(uploads.single('file'), (req, res) => {
-
-      try {
-        res.send("Upload file successfully")
-      } catch (error) {
-        console.log(error);
-      }
-
-    });
-
-    this.app.use(Auth.validate);
-    // NewsController
-    this.app.route('/api/v1/news').get(NewsController.get);
-    this.app.route('/api/v1/news/:id').get(NewsController.getById);
-    this.app.route('/api/v1/news').post(NewsController.create);
-    this.app.route('/api/v1/news/:id').put(NewsController.update);
-    this.app.route('/api/v1/news/:id').delete(NewsController.delete);
-
-  }
 }
 
 export default new StartUp();
