@@ -26,7 +26,6 @@ class NewsService {
     let result = await NewsRepository.findByIdAndRemove(_id);
     return result;
   }
-
 }
 
 export default new NewsService();

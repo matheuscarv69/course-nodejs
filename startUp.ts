@@ -3,7 +3,7 @@ import * as bodyParser from "body-parser";
 import * as cors from "cors";
 
 import Database from "./infra/database";
-import router from "./routes";
+import router from "./router/routes";
 
 class StartUp {
   public app: express.Application;
