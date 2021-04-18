@@ -8,7 +8,7 @@ class NewsController {
 
   get(req, res) {
 
-    let client = redis.createClient();
+    let client = redis.createClient(6379, 'redis');
 
     client.get('news', function (error, reply) {
       if (reply) {
