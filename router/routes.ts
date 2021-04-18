@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
 
 // Authentication
 router.use(authRouter);
-router.use(Auth.validate);
+// router.use(Auth.validate);
 
 // News
 router.use(newsRouter);

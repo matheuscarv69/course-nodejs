@@ -1,6 +1,7 @@
 import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as cors from "cors";
+import * as compression from "compression";
 
 import Database from "./infra/database";
 import router from "./router/routes";
@@ -34,6 +35,7 @@ class StartUp {
     this.app.use(bodyParser.json());
     // para poder trabalhar com query string 
     this.app.use(bodyParser.urlencoded({ extended: false }));
+    this.app.use(compression());
   }
 
 }
