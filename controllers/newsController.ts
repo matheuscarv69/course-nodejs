@@ -6,66 +6,82 @@ import Helper from '../infra/helper';
 
 class NewsController {
 
-  get(req, res) {
+  async get(req, res) {
 
-    let client = redis.createClient(6379, 'redis');
+    try {
+      // let client = redis.createClient(6379, 'redis');
+      let client = redis.createClient();
 
-    client.get('news', function (error, reply) {
-      if (reply) {
-        console.log('redis');
-        // Json.parse é feito para converter o que tiver no redis para json
-        Helper.sendResponse(res, HttpStatus.OK, JSON.parse(reply))
-      } else {
-        console.log('db');
+      await client.get('news', async function (error, reply) {
+        if (reply) {
+          console.log('redis');
+          // Json.parse é feito para converter o que tiver no redis para json
+          Helper.sendResponse(res, HttpStatus.OK, JSON.parse(reply))
+        } else {
+          console.log('db');
 
-        NewsService.get()
-          .then(news => {
-            client.set('news', JSON.stringify(news));
-            client.expire('news', 20);
-
-            Helper.sendResponse(res, HttpStatus.OK, news)
-          })
-          .catch(error => console.error.bind(console, `Error ${error}`))
-      }
-    })
-
-
+          let result = await NewsService.get();
+          client.set('news', JSON.stringify(result));
+          client.expire('news', 20);
+          Helper.sendResponse(res, HttpStatus.OK, result)
+        }
+      })
+    } catch (error) {
+      console.error.bind(console, `Error ${error}`)
+    }
 
   }
 
-  getById(req, res) {
-    const _id = req.params.id;
+  async getById(req, res) {
 
-    NewsService.getById(_id)
-      .then(news => Helper.sendResponse(res, HttpStatus.OK, news))
-      .catch(error => console.error.bind(console, `Error ${error}`))
+    try {
+      const _id = req.params.id;
+
+      let result = await NewsService.getById(_id);
+      Helper.sendResponse(res, HttpStatus.OK, result);
+    } catch (error) {
+      console.error.bind(console, `Error ${error}`);
+    }
   }
 
-  create(req, res) {
-    let vm = req.body;
+  async create(req, res) {
 
-    NewsService.create(vm)
-      .then(news => Helper.sendResponse(res, HttpStatus.CREATED, "News created successfully"))
-      .catch(error => console.error.bind(console, `Error ${error}`))
+    try {
+      let vm = req.body;
+
+      await NewsService.create(vm);
+      Helper.sendResponse(res, HttpStatus.CREATED, "News created successfully");
+    } catch (error) {
+      console.error.bind(console, `Error ${error}`);
+    }
+
   }
 
-  update(req, res) {
-    const _id = req.params.id;
-    let news = req.body;
+  async update(req, res) {
+    try {
+      const _id = req.params.id;
+      let news = req.body;
 
-    NewsService.update(_id, news)
-      .then(news => Helper.sendResponse(res, HttpStatus.OK, "News updated successfully"))
-      .catch(error => console.error.bind(console, `Error ${error}`))
+      await NewsService.update(_id, news);
+      Helper.sendResponse(res, HttpStatus.OK, "News updated successfully");
+
+    } catch (error) {
+      console.error.bind(console, `Error ${error}`);
+    }
   }
 
-  delete(req, res) {
-    const _id = req.params.id;
+  async delete(req, res) {
 
-    NewsService.delete(_id)
-      .then(() => Helper.sendResponse(res, HttpStatus.OK, "News deleted successfully"))
-      .catch(error => console.error.bind(console, `Error ${error}`))
+    try {
+      const _id = req.params.id;
+
+      await NewsService.delete(_id);
+      Helper.sendResponse(res, HttpStatus.OK, "News deleted successfully");
+    } catch (error) {
+      console.error.bind(console, `Error ${error}`);
+    }
+
   }
-
 }
 
 export default new NewsController();
