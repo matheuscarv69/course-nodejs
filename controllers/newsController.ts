@@ -32,6 +32,18 @@ class NewsController {
 
   }
 
+  async search(req, res) {
+
+    try {
+      const term = req.params.term;
+
+      let result = await NewsService.search(term);
+      Helper.sendResponse(res, HttpStatus.OK, result);
+    } catch (error) {
+      console.error.bind(console, `Error ${error}`);
+    }
+  }
+
   async getById(req, res) {
 
     try {
