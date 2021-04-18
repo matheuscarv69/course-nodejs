@@ -12,9 +12,12 @@ class NewsController {
 
     client.get('news', function (error, reply) {
       if (reply) {
+        console.log('redis');
         // Json.parse é feito para converter o que tiver no redis para json
         Helper.sendResponse(res, HttpStatus.OK, JSON.parse(reply))
       } else {
+        console.log('db');
+
         NewsService.get()
           .then(news => {
             client.set('news', JSON.stringify(news));
