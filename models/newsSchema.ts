@@ -7,8 +7,8 @@ const NewsSchema = new mongoose.Schema({
   author: { type: String },
   img: { type: String },
   publishDate: { type: Date },
-  link: { type: String },
   tag: { type: String },
+  link: { type: String },
   active: { type: Boolean },
 });
 

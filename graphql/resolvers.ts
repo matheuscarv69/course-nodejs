@@ -9,7 +9,7 @@ const resolvers = {
   },
 
   addNews: async (args) => {
-    return await NewsService.create(args);
+    return await NewsService.create(args.input);
   },
   
   updateNews: async (args) => {
