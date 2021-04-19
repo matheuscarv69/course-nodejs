@@ -11,15 +11,15 @@ const resolvers = {
   addNews: async (args) => {
     return await NewsService.create(args);
   },
+  
+  updateNews: async (args) => {
+    return await NewsService.update(args.input._id, args.input);
+  },
 
   deleteNews: async (args) => {
     return await NewsService.delete(args.id);
-  },
-
-  updateNews: async (args) => {
-    return await NewsService.update(args.input._id, args.input);
   }
-  
+
 }
 
 export default resolvers;
