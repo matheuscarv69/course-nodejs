@@ -14,7 +14,11 @@ class NewsService {
   }
 
   async get() {
-    let result = await NewsRepository.find({});
+    /*
+    * usando o sort para ordenar as noticias da mais recente 
+    * para a mais antiga (-1), da mais antiga pra mais recente (1)
+    */
+    let result = await NewsRepository.find({}).sort({publishDate: -1});
     return result;
   }
 
@@ -24,6 +28,7 @@ class NewsService {
   }
 
   async create(news) {
+    news.publishDate = new Date();
     let result = await NewsRepository.create(news);
     return result;
   }
