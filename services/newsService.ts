@@ -9,7 +9,7 @@ class NewsService {
      * que tiver o termo passado tanto no inicio como no final,
      * ignorando o case sensitive ('i')
      */
-    let result = await NewsRepository.find({ 'title': new RegExp('.*' + term + '*.', 'i'), 'active': true }).sort({publishDate: - 1});
+    let result = await NewsRepository.find({ 'title': new RegExp('.*' + term + '*.', 'i'), 'active': true }).sort({ publishDate: - 1 });
     return result;
   }
 
