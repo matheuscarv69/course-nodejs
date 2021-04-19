@@ -4,21 +4,24 @@ class NewsService {
 
 
   async search(term) {
-    /*
-    * Busca no mongo usando Regex, onde: procura-se por toda noticia
-    * que tiver o termo passado tanto no inicio como no final,
-    * ignorando o case sensitive ('i')
-    */
-    let result = await NewsRepository.find({ 'title': new RegExp('.*' + term + '*.', 'i'), 'active': true })
+    /**
+     * Busca no mongo usando Regex, onde: procura-se por toda noticia 
+     * que tiver o termo passado tanto no inicio como no final,
+     * ignorando o case sensitive ('i')
+     */
+    let result = await NewsRepository.find({ 'title': new RegExp('.*' + term + '*.', 'i'), 'active': true }).sort({publishDate: - 1});
     return result;
   }
 
   async get() {
-    /*
-    * usando o sort para ordenar as noticias da mais recente 
-    * para a mais antiga (-1), da mais antiga pra mais recente (1)
-    */
-    let result = await NewsRepository.find({}).sort({publishDate: -1});
+    /**
+     * Ordernando por publishDate
+     * Usando o sort para ordenar as noticias da mais recente  
+     * para a mais antiga (-1), da mais antiga pra mais recente (1)
+     * 
+     *  Limitando resultados: .limit(qtd de resultados)
+     **/
+    let result = await NewsRepository.find({}).sort({ publishDate: -1 });
     return result;
   }
 

@@ -37,6 +37,12 @@ class NewsController {
     try {
       const term = req.params.term;
 
+      // // deprecated
+      //  ternarios usados para pegar os valores de pag e itens que devem ser retornados
+      // const page = (req.params('page')) ? parseInt(req.params('page')) : 1;
+      // const perPage = (req.params('limit')) ? parseInt(req.params('limit')) : 10;
+      // // let result = await NewsService.search(term, page, perPage);
+
       let result = await NewsService.search(term);
       Helper.sendResponse(res, HttpStatus.OK, result);
     } catch (error) {
