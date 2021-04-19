@@ -11,7 +11,7 @@ class AuthController {
     const token = await UserService.create(user);
 
     Helper.sendResponse(res, HttpStatus.CREATED, {
-      message: "User created successfully",   
+      message: "User created successfully",
       token: token
     });
   }

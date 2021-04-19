@@ -5,6 +5,7 @@ import Auth from '../infra/auth';
 
 import authRouter from "./authRouter";
 import newsRouter from "./newsRouter";
+import userRouter from "./userRouter";
 import graphQlRouter from "./graphqlRouter";
 
 const router = express.Router();
@@ -23,6 +24,9 @@ router.use(Auth.validate);
 
 // News
 router.use(newsRouter);
+
+// Users
+router.use(userRouter);
 
 // GraphQl
 router.use(graphQlRouter);
