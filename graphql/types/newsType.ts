@@ -5,6 +5,7 @@ scalar Date
 type Query{
   newsList:[News]
   newsGetById(id: String): News
+  usersList:[User]
 }
 
 type Mutation{
@@ -37,6 +38,19 @@ input NewsInput{
   tag: String,
   link: String,
   active: Boolean
+}
+
+
+type User {
+  _id: String,
+  username: String,
+  email: String
+}
+
+input UserInput {
+  _id: String,
+  username: String,
+  email: String
 }
 
 `

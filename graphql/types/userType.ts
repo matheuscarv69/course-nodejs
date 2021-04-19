@@ -1,7 +1,7 @@
 export default `
 
 type Query {
-  
+  usersList:[User]
 }
 
 type User {
