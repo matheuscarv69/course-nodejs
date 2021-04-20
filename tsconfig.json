@@ -2,14 +2,13 @@
   "compilerOptions": {
       "target": "es6",
       "module": "commonjs",
+      "lib": ["es2018", "esnext.asynciterable"],
       "outDir": "dist",
       "incremental": true,
-      "typeRoots": [
-          "../node_modules/@types"
-      ],
-      "types": [
-          "node"
-      ]
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "typeRoots": ["../node_modules/@types"],
+      "types": ["node"]
   },
   "include": [        
       "**/*.ts",
